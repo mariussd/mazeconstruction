@@ -5,7 +5,7 @@ Heavily inspired by https://www.youtube.com/watch?v=HyK_Q5rrcr4
 
 // Cell width, columns and rows for the canvas
 var cols, rows;
-var cell_width = 20;
+var cell_width = 40;
 
 // All cells are stored here – not 2D
 var cell_grid = [];
@@ -16,8 +16,10 @@ var current_cell;
 // The stack for the backtrack
 var stack = [];
 
+var copied = false;
+
 function setup() {
-    createCanvas(800, 800);
+    createCanvas(400, 400);
     cols = floor(width / cell_width);
     rows = floor(height / cell_width);
 
@@ -30,7 +32,7 @@ function setup() {
     }
 
     current_cell = cell_grid[0];
-    
+
 }
 
 function index(i, j) {
@@ -66,6 +68,10 @@ function draw() {
         current_cell = next;
     } else if (stack.length > 0) {
         current_cell = stack.pop();
+    } else {
+        if (!copied) {
+            copy_maze();
+        }
     }
 
 }
@@ -90,4 +96,15 @@ function remove_walls(a, b) {
         b.walls[0] = false;
     }
 
+}
+
+function copy_maze() {
+    var cells = [];
+
+    for (var i = 0; i < cell_grid.length; i++) {
+        cells.push(cell_grid[i].walls);
+    }
+
+    copied = true;
+    console.log(cells);
 }

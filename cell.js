@@ -42,6 +42,14 @@ function Cell(i, j) {
         rect(x, y, cell_width, cell_width);
     }
 
+    this.target = function() {
+        var y = this.j * cell_width;
+        var x = this.i * cell_width;
+        noStroke();
+        fill(0, 255, 0, 200);
+        rect(x, y, cell_width, cell_width);
+    }
+
     this.show = function() {
         var y = this.j * cell_width;
         var x = this.i * cell_width;
